@@ -2,121 +2,187 @@
 Global variables
 ***************/
 
+// Store all questions, choices and answers
 var questions_answers = [
   {
-    question: "What are the Seven Words You Can Never Say On Television?",
+    question:
+      "Who said \"Let's go to brunch. What a great idea! Why would you want to sleep in on a Sunday when you can go pay $18 for eggs? Now, you're thinking.\"",
 
     choices: [
-      "Answer number one",
+      "Dave Chappelle",
 
-      "Answer number two",
+      "Louis C.K.",
 
-      "Answer number three",
+      "Anthony Jeselnik",
 
-      "Answer number four",
+      "Daniel Tosh",
 
-      "Correct"
+      "Bill Burr"
     ],
 
-    correctAnswer: 4
+    correctAnswer: "Bill Burr"
   },
 
   {
-    question: "Question number one",
+    question:
+      "Who said \"You have to pretend like you want to use a condom. I like to say something fun when I bring it up, but honest. I'll be like, \"You're going to want to wear this. I've had a busy month.\"",
 
     choices: [
-      "Answer number one",
+      "Sarah Silverman",
 
-      "Correct",
+      "Amy Schumer",
 
-      "Answer number three",
+      "Whitney Cummings",
 
-      "Answer number four",
+      "Jessica Williams",
 
-      "Answer number five"
+      "Kathy Griffin"
     ],
 
-    correctAnswer: 1
+    correctAnswer: "Amy Schumer"
   },
 
   {
-    question: "Question number two",
+    question:
+      "Who said, \"Anal sex is a lot like spinach: if you're forced to have it as a child, you won't enjoy it as an adult.\"",
 
     choices: [
-      "Answer number one",
+      "Louis C.K.",
 
-      "Answer number two",
+      "Doug Stanhope",
 
-      "Answer number three",
+      "Dave Attell",
 
-      "Correct",
+      "Daniel Tosh",
 
-      "Answer number five"
+      "Norm MacDonald"
     ],
 
-    correctAnswer: 3
+    correctAnswer: "Daniel Tosh"
   },
 
   {
-    question: "Question number three",
+    question:
+      "Who said, \"Seriously, I don't need a gun. I'm easily annoyed. I would shoot people in my house that I invited over.\"",
 
     choices: [
-      "Answer number one",
+      "Chris Rock",
 
-      "Answer number two",
+      "Joan Rivers",
 
-      "Answer number three",
+      "George Carlin",
 
-      "Answer number four",
+      "Margaret Cho",
 
-      "Correct"
+      "Wanda Sykes"
     ],
 
-    correctAnswer: 4
+    correctAnswer: "Wanda Sykes"
   },
 
   {
-    question: "Question number four",
+    question:
+      'Who said, "Half of all marriages end in divorce -- and then there are the really unhappy ones."',
 
     choices: [
-      "Answer number one",
+      "Phyllis Diller",
 
-      "Answer number two",
+      "Lily Tomlin",
 
-      "Answer number three",
+      "Betty White",
 
-      "Answer number four",
+      "Lucille Ball",
 
-      "ABCDEFG"
+      "Joan Rivers"
     ],
 
-    correctAnswer: 4
+    correctAnswer: "Joan Rivers"
   },
 
   {
-    question: "Question number five",
+    question:
+      'Who said, "The meal is not over when I\'m full. The meal is over when I hate myself."',
 
     choices: [
-      "Answer number one",
+      "Louie Anderson",
 
-      "Answer number two",
+      "Ralphie May",
 
-      "Answer number three",
+      "Jim Gaffigan",
 
-      "Answer number four",
+      "Gabriel Iglesias",
 
-      "ABCDEFG"
+      "Louis C.K."
     ],
 
-    correctAnswer: 4
+    correctAnswer: "Louis C.K."
+  },
+  {
+    question:
+      'Who said "All these years, I thought I liked chicken cause it was delicious; but turns out, I\'m genetically predisposed to liking chicken!"',
+
+    choices: [
+      "Dave Chappelle",
+
+      "Eddie Murphy",
+
+      "Richard Pryor",
+
+      "Kevin Hart",
+
+      "Bernie Mac"
+    ],
+
+    correctAnswer: "Dave Chappelle"
+  },
+
+  {
+    question: 'Who said, " "',
+
+    choices: ["", "", "", "", ""],
+
+    correctAnswer: ""
+  },
+
+  {
+    question: 'Who said, ""',
+
+    choices: ["", "", "", "", ""],
+
+    correctAnswer: ""
+  },
+
+  {
+    question: 'Who said, ""',
+
+    choices: ["", "", "", "", ""],
+
+    correctAnswer: ""
+  },
+
+  {
+    question: 'Who said, ""',
+
+    choices: ["", "", "", "", ""],
+
+    correctAnswer: ""
+  },
+
+  {
+    question:
+      'Who said, "The meal is not over when I\'m full. The meal is over when I hate myself."',
+
+    choices: ["", "", "", "", ""],
+
+    correctAnswer: ""
   }
 ];
 
-//Store the total number of questions
+// Store the total number of questions
 
 var totalQuestions = questions_answers.length;
 
-//Set the current question to display
+// Set the current question to display
 
 var currentQuestion = 0;
 
@@ -137,6 +203,8 @@ var counter = maxTimer;
 var myVar = setInterval(function() {
   timer();
 }, 1000);
+
+correctAnswerText = questions_answers[currentQuestion].correctAnswer;
 
 /********
 Functions
@@ -200,7 +268,9 @@ function guessMade(guessNum) {
 
     right++;
   } else {
-    alert("Wrong");
+    //   console.log("Each input value: " + $(this).val());
+    // });
+    alert("Wrong. The correct answer is: " + correctAnswerText);
 
     wrong++;
   }
@@ -226,6 +296,8 @@ function displayCurrent(questionNum) {
       $("#answers").append(
         "<input type=radio id='" +
           i +
+          // "' value='" +
+          // questions_answers[questionNum].choices[i] +
           "' onclick='guessMade(" +
           i +
           ")'>" +
