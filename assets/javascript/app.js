@@ -169,8 +169,7 @@ var questions_answers = [
   },
 
   {
-    question:
-      'Who said, "The meal is not over when I\'m full. The meal is over when I hate myself."',
+    question: 'Who said, ""',
 
     choices: ["", "", "", "", ""],
 
