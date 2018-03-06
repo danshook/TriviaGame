@@ -5,164 +5,265 @@ Global variables
 var questions_answers = [
   {
     question: "What are the Seven Words You Can Never Say On Television?",
+
     choices: [
       "Answer number one",
+
       "Answer number two",
+
       "Answer number three",
+
       "Answer number four",
-      "Answer number five",
-      "Shit piss fuck cunt cocksucker motherfucker tits"
+
+      "Correct"
     ],
-    correctAnswer: "Shit piss fuck cunt cocksucker motherfucker tits"
+
+    correctAnswer: 4
   },
+
   {
-    question: "Question number one?",
+    question: "Question number one",
+
     choices: [
       "Answer number one",
-      "Answer number two",
+
+      "Correct",
+
       "Answer number three",
+
       "Answer number four",
-      "Answer number five",
-      "Shit piss fuck cunt cocksucker motherfucker tits"
+
+      "Answer number five"
     ],
-    correctAnswer: "Answer number one"
+
+    correctAnswer: 1
   },
+
   {
     question: "Question number two",
+
     choices: [
       "Answer number one",
+
       "Answer number two",
+
       "Answer number three",
-      "Answer number four",
-      "Answer number five",
-      "Shit piss fuck cunt cocksucker motherfucker tits"
+
+      "Correct",
+
+      "Answer number five"
     ],
-    correctAnswer: "Answer number two"
+
+    correctAnswer: 3
   },
+
   {
-    question: "Question number three??",
+    question: "Question number three",
+
     choices: [
       "Answer number one",
+
       "Answer number two",
+
       "Answer number three",
+
       "Answer number four",
-      "Answer number five",
-      "Shit piss fuck cunt cocksucker motherfucker tits"
+
+      "Correct"
     ],
-    correctAnswer: "Answer number three"
+
+    correctAnswer: 4
   },
+
   {
-    question: "Question number four?",
+    question: "Question number four",
+
     choices: [
       "Answer number one",
+
       "Answer number two",
+
       "Answer number three",
+
       "Answer number four",
-      "Answer number five",
-      "Shit piss fuck cunt cocksucker motherfucker tits"
+
+      "ABCDEFG"
     ],
-    correctAnswer: "Answer number four"
+
+    correctAnswer: 4
   },
+
   {
     question: "Question number five",
+
     choices: [
       "Answer number one",
+
       "Answer number two",
+
       "Answer number three",
+
       "Answer number four",
-      "Answer number five",
-      "Shit piss fuck cunt cocksucker motherfucker tits"
+
+      "ABCDEFG"
     ],
-    correctAnswer: "Answer number five"
+
+    correctAnswer: 4
   }
 ];
 
 //Store the total number of questions
+
 var totalQuestions = questions_answers.length;
 
-//Set the current question to display to 1
-// var currentQuestion = 0;
-var questions_answers = 0;
+//Set the current question to display
 
-//Store the selector in a variable.
-$questions = questions_answers;
+var currentQuestion = 0;
 
-//Hide all the questions
-$questions.hide();
+// Track right and wrong answers
 
-//Show the first question
-$($questions.get(currentQuestion)).fadeIn();
+var right = 0;
+
+var wrong = 0;
+
+// Set the max Timer amount (in seconds) and the countdown amount
+
+var maxTimer = 10;
+
+var counter = maxTimer;
+
+// Creates a timer that can be turned off and on and reset
+
+var myVar = setInterval(function() {
+  timer();
+}, 1000);
 
 /********
 Functions
 ********/
 
-// function timer() {
-//   var counter = 7;
-//   setInterval(function() {
-//     counter--;
-//     if (counter >= 0) {
-//       $("#counter").text(counter);
-//     }
-//     // Display 'counter' wherever you want to display it.
-//     if (counter === 0) {
-//       alert("Times up!");
-//       clearInterval(counter);
-//     }
-//   }, 1000);
-// }
+// Stops the timer
 
-//function checkAnswer() {
-//   if
-// }
+function stopTimer() {
+  clearInterval(myVar);
+}
 
-/*********** 
+// Restarts the timer with the max amount and displays this first value
+
+function startTimer() {
+  counter = maxTimer;
+
+  myVar = setInterval(function() {
+    timer();
+  }, 1000);
+
+  $("#counter").text(maxTimer);
+}
+
+// This runs at each timer interval - every second - when the timer is running
+
+// Counts down, displays the current timer and interrupts if the person is out of time
+
+function timer() {
+  counter--;
+
+  if (counter >= 0) {
+    $("#counter").text(counter);
+  }
+
+  if (counter === 0) {
+    $("#counter").text(0);
+
+    alert("Time's up!");
+
+    stopTimer();
+
+    wrong++;
+
+    currentQuestion++;
+
+    displayCurrent(currentQuestion);
+  }
+}
+
+// Onclick event for the answers.  Checks to see if the selected answer is right or wrong
+
+// and then updates everything accordingly before going on to the next question
+
+function guessMade(guessNum) {
+  stopTimer();
+
+  // test for correct response and let them know how they did
+
+  if (guessNum === questions_answers[currentQuestion].correctAnswer) {
+    alert("Correct");
+
+    right++;
+  } else {
+    alert("Wrong");
+
+    wrong++;
+  }
+
+  currentQuestion++; // go to the next question
+
+  displayCurrent(currentQuestion);
+}
+
+// Checks if we have gone through all of the questions
+
+// If not, displays the current question and potential answers, then restarts the timer
+
+// If yes, gives the game ending info
+
+function displayCurrent(questionNum) {
+  if (currentQuestion < totalQuestions) {
+    $("#question").text(questions_answers[questionNum].question);
+
+    $("#answers").text("");
+
+    for (var i = 0; i <= 4; i++) {
+      $("#answers").append(
+        "<input type=radio id='" +
+          i +
+          "' onclick='guessMade(" +
+          i +
+          ")'>" +
+          questions_answers[questionNum].choices[i] +
+          "</input><br>"
+      );
+    }
+
+    startTimer();
+  } else {
+    // we are done
+
+    $("#question").text(
+      "You finished with " + right + " correct and " + wrong + " incorrect."
+    );
+
+    $("#answers").text("");
+  }
+}
+
+/***********
 Main process
 ***********/
 
+// The timer starts when it's created above, so stop it until the game starts
+
+stopTimer();
+
+$("#clockLabel").hide(); // don't want the counter on until we start
+
 // Start game by pressing button on initial screen
-// Display multiple choice answers
+
 $("#beginButton").click(function() {
   $("#beginButton").toggle();
-  // Do I need this? event.preventDefault();
-  // Do I need this? keeps page from refreshing everytime you press button
 
-  // new code starts here
+  // Display the first question
 
-  $($questions.get(currentQuestion)).fadeOut(function() {
-    //increment the current question by one
-    currentQuestion = currentQuestion + 1;
+  $("#clockLabel").show();
 
-    //if there are no more questions do stuff
-    if (currentQuestion == totalQuestions) {
-      var result = sum_values();
-
-      //do stuff with the result
-      alert(result);
-    } else {
-      //otherwise show the next question
-      $($questions.get(currentQuestion)).fadeIn();
-    }
-  });
+  displayCurrent(currentQuestion);
 });
-
-// new code stops here
-
-for (var i = 0; i < questions_answers.length; i++) {
-  console.log("QUESTION " + questions_answers[i].question);
-  $("#questions_answers").append(
-    "<h4>" + questions_answers[i].question + "</h4>"
-  );
-  for (var j = 0; j < questions_answers[i].choices.length; j++) {
-    console.log("CHOICES " + questions_answers[i].choices[j]);
-    $("#questions_answers").append(
-      "<input type='radio' name='sameName'><br>" +
-        questions_answers[i].choices[j] +
-        "</input><br>"
-    );
-  }
-}
-// timer();
-// console.log("timer " + timer);
-// startGame();
-// });
