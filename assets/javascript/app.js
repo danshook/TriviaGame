@@ -137,43 +137,98 @@ var questions_answers = [
   },
 
   {
-    question: 'Who said, " "',
+    question:
+      "Who said, \"I feel sorry for people who don't drink or do drugs. Because someday they're going to be in a hospital bed, dying, and they won't know why.\"",
 
-    choices: ["", "", "", "", ""],
+    choices: [
+      "Chris Rock",
 
-    correctAnswer: ""
+      "Richard Pryor",
+
+      "Redd Foxx",
+
+      "Bernie Mac",
+
+      "Cedric the Entertainer"
+    ],
+
+    correctAnswer: "Redd Foxx"
   },
 
   {
-    question: 'Who said, ""',
+    question:
+      'Who said, "As a housewife, I feel if the kids are still alive when my husband gets home from work, then hey, I\'ve done my job"',
 
-    choices: ["", "", "", "", ""],
+    choices: [
+      "Roseanne Barr",
 
-    correctAnswer: ""
+      "Amy Poehler",
+
+      "Tina Fey",
+
+      "Ali Wong",
+
+      "Joan Rivers"
+    ],
+
+    correctAnswer: "Roseanne Barr"
   },
 
   {
-    question: 'Who said, ""',
+    question:
+      'Who said, "After I quit drinking, I realized I am the same asshole I always was; I just have fewer dents in my car"',
 
-    choices: ["", "", "", "", ""],
+    choices: [
+      "Doug Stanhope",
 
-    correctAnswer: ""
+      "George Carlin",
+
+      "David letterman",
+
+      "Robin Williams",
+
+      "Russell Brand"
+    ],
+
+    correctAnswer: "Robin Williams"
   },
 
   {
-    question: 'Who said, ""',
+    question:
+      'Who said, "I\'ve been getting into astronomy so I installed a skylight. The people who live above me are furious."',
 
-    choices: ["", "", "", "", ""],
+    choices: [
+      "Nick Swardson",
 
-    correctAnswer: ""
+      "Brian Regan",
+
+      "T.J. Miller",
+
+      "Ron White",
+
+      "Steven Wright"
+    ],
+
+    correctAnswer: "Steven Wright"
   },
 
   {
-    question: 'Who said, ""',
+    question:
+      'Who said, "Black guys with dirty sneakers scare the shit out of me."',
 
-    choices: ["", "", "", "", ""],
+    choices: [
+      "Robin Williams",
 
-    correctAnswer: ""
+      "Zach Galifianakis",
+
+      "Bill Burr",
+
+      "Mike Birbiglia",
+
+      "Louis C.K."
+    ],
+
+    correctAnswer: "Bill Burr"
   }
 ];
 
@@ -193,7 +248,7 @@ var wrong = 0;
 
 // Set the max Timer amount (in seconds) and the countdown amount
 
-var maxTimer = 10;
+var maxTimer = 25;
 
 var counter = maxTimer;
 
@@ -203,7 +258,7 @@ var myVar = setInterval(function() {
   timer();
 }, 1000);
 
-correctAnswerText = questions_answers[currentQuestion].correctAnswer;
+var correctAnswerText = "";
 
 /********
 Functions
@@ -261,8 +316,11 @@ function guessMade(guessNum) {
   stopTimer();
 
   // test for correct response and let them know how they did
-
-  if (guessNum === questions_answers[currentQuestion].correctAnswer) {
+  if (
+    questions_answers[currentQuestion].choices[guessNum] ===
+    questions_answers[currentQuestion].correctAnswer
+  ) {
+    // if (guessNum === questions_answers[currentQuestion].correctAnswer) {
     alert("Correct");
 
     right++;
@@ -290,7 +348,7 @@ function displayCurrent(questionNum) {
     $("#question").text(questions_answers[questionNum].question);
 
     $("#answers").text("");
-
+    correctAnswerText = questions_answers[currentQuestion].correctAnswer;
     for (var i = 0; i <= 4; i++) {
       $("#answers").append(
         "<input type=radio id='" +
