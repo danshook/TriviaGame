@@ -1,6 +1,6 @@
-/***************
-Global variables
-***************/
+/****************************************
+          Global variables
+****************************************/
 
 // Store all questions, choices and answers
 var questions_answers = [
@@ -260,9 +260,9 @@ var myVar = setInterval(function() {
 
 var correctAnswerText = "";
 
-/********
-Functions
-********/
+/***********************************
+             Functions
+***********************************/
 
 // Stops the timer
 
@@ -325,8 +325,6 @@ function guessMade(guessNum) {
 
     right++;
   } else {
-    //   console.log("Each input value: " + $(this).val());
-    // });
     alert("Wrong. The correct answer is: " + correctAnswerText);
 
     wrong++;
@@ -353,8 +351,6 @@ function displayCurrent(questionNum) {
       $("#answers").append(
         "<input type=radio id='" +
           i +
-          // "' value='" +
-          // questions_answers[questionNum].choices[i] +
           "' onclick='guessMade(" +
           i +
           ")'>" +
@@ -372,18 +368,21 @@ function displayCurrent(questionNum) {
     );
 
     $("#answers").text("");
+
+    $("#newGame").show();
   }
 }
 
-/***********
-Main process
-***********/
+/*****************************************
+              Main process
+*****************************************/
 
 // The timer starts when it's created above, so stop it until the game starts
 
 stopTimer();
 
 $("#clockLabel").hide(); // don't want the counter on until we start
+$("#newGame").hide();
 
 // Start game by pressing button on initial screen
 
@@ -394,5 +393,13 @@ $("#beginButton").click(function() {
 
   $("#clockLabel").show();
 
+  displayCurrent(currentQuestion);
+});
+
+$("#newGame").click(function() {
+  $("#newGame").toggle();
+  // alert("wtf?");
+  startTimer();
+  currentQuestion = 0;
   displayCurrent(currentQuestion);
 });
