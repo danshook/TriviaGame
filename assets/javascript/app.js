@@ -351,9 +351,9 @@ function displayCurrent(questionNum) {
       $("#answers").append(
         "<input type=radio id='" +
           i +
-          "' onclick='guessMade(" +
+          "'onclick='guessMade(" +
           i +
-          ")'>" +
+          ")'>&nbsp&nbsp&nbsp" +
           questions_answers[questionNum].choices[i] +
           "</input><br>"
       );

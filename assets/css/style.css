@@ -1,0 +1,32 @@
+/* html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#banner {
+  font-family: "Caesar Dressing", cursive;
+  font-size: 80px;
+  background-image: url("../images/2.jpg");
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.col-sm-4 {
+  font-family: "Caesar Dressing", cursive;
+}
+
+.container-fluid {
+  background-image: url("../images/1.jpg");
+  height: 100%;
+} */
+
+.footer {
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  padding: 30px 0;
+  font-size: 12px;
+  text-align: center;
+}
