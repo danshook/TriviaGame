@@ -398,7 +398,6 @@ $("#beginButton").click(function() {
 
 $("#newGame").click(function() {
   $("#newGame").toggle();
-  // alert("wtf?");
   startTimer();
   currentQuestion = 0;
   displayCurrent(currentQuestion);
